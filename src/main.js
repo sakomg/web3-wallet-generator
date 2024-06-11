@@ -19,12 +19,15 @@ if (isDevelopment) {
 } else {
 	const domain = String(process.env.DOMAIN);
 	const secretPath = String(process.env.TELEGRAM_TOKEN);
+	console.log(domain);
 	const app = express();
 
 	app.use(express.json());
 
 	const port = process.env.PORT || 3000;
 	app.listen(Number(port), async () => {
+		console.log("server running...");
+		console.log(domain);
 		await instance.bot.api.setWebhook(`https://${domain}/${secretPath}`);
 	});
 }
