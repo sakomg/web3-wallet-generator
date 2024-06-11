@@ -22,7 +22,7 @@ export const numberKeyboard = [
     { text: "10", callback_data: "SELECT_NUMBER:10" },
     { text: "20", callback_data: "SELECT_NUMBER:20" },
   ],
-  [{ text: "Custom", callback_data: "SELECT_NUMBER_OF_WALLET custom" }],
+  [{ text: "Custom", callback_data: "SELECT_NUMBER:CUSTOM" }],
 ];
 
 export const exportAsKeyboard = [
