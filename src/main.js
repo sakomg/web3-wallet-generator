@@ -15,8 +15,10 @@ if (!data || Object.keys(data).length === 0) {
 const instance = new Telegram(process.env, JSON.parse(data));
 
 if (isDevelopment) {
+	console.log("development");
 	instance.bot.start();
 } else {
+	console.log("production");
 	const domain = String(process.env.DOMAIN);
 	const secretPath = String(process.env.TELEGRAM_TOKEN);
 	console.log(domain);
