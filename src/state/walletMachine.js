@@ -29,6 +29,15 @@ export const walletMachine = createMachine(
 						target: "selectingExportFormat",
 						actions: "setNumberOfWallets",
 					},
+					SELECT_CUSTOM: "enteringCustomNumber",
+				},
+			},
+			enteringCustomNumber: {
+				on: {
+					ENTER_CUSTOM_NUMBER: {
+						target: "selectingExportFormat",
+						actions: "setNumberOfWallets",
+					},
 				},
 			},
 			selectingExportFormat: {

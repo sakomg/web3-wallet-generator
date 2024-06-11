@@ -1,4 +1,11 @@
 {
-  "start": "🔑 Firstly, select a blockchain network to generate wallets.",
-  "help": "If you need assistance, feel free to send a direct message to @saskakomegunov."
+	"start": "Select a blockchain network from the options below to generate wallets. This bot supports multiple chains like Ethereum (EVM) and TON (Telegram Open Network). \n\nYour data is secure and remains private with you. Let's get started!",
+	"help": "If you need assistance, feel free to send a direct message to @saskakomegunov. \n\nHere are some common commands: \n/start - Restart the wallet generation process \n/help - Display this help message",
+	"thanks": "Thank you for considering a donation! Here's the EVM wallet address:\r\n\r\n0x0D7D1Dd57D03872298236403d8d5d7A78135d417",
+	"select_chain": "🔗 You’ve selected {chain}. Now, please choose how many wallets you would like to generate. The options below allow you to specify the number of wallets quickly.",
+	"select_number": "🔢 You've selected {number} wallets. Next, please choose how you want to receive the generated wallet details. You can receive the details in different formats such as CSV, TXT, JSON, or as a simple message.",
+	"select_export_format": "📄 You've chosen {format} format. Please wait a moment while we generate your wallets and prepare the data for you.",
+	"wallet_generation_success": "✅ Your wallets have been successfully generated! Continue by calling the 'start' command again.",
+	"invalid_number": "⚠️ Please enter a valid number (0 < wallets ≤ 500).",
+	"enter_number_wallets": "🌟 Great! Please enter the number of wallets you'd like to generate (maximum is 500)."
 }

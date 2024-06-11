@@ -9,7 +9,7 @@ export default class Wallets {
 
 	getContent() {
 		if (!this.#format) {
-			throw new Error(`Provide format to export wallets.`);
+			throw new Error(`⚠️ Provide format to export wallets.`);
 		}
 
 		const formatHandlers = {
@@ -22,7 +22,7 @@ export default class Wallets {
 		const handler = formatHandlers[this.#format];
 
 		if (!handler) {
-			throw new Error(`Unsupported format (${this.#format}) to export wallets.`);
+			throw new Error(`⚠️ Unsupported format (${this.#format}) to export wallets.`);
 		}
 
 		return handler();
@@ -32,7 +32,7 @@ export default class Wallets {
 		let csvContent = "Account,Password,Address,Private Key,Seed Phrase\r\n";
 		for (let idx = 0; idx < this.#wallets.length; idx++) {
 			const w = this.#wallets[idx];
-			csvContent += `${w.idx},${w.password},${w.wallet.address},${w.wallet.privateKey},${w.wallet.seed}`;
+			csvContent += `${w.idx},${w.password},${w.wallet.address},${w.wallet.privateKey},${w.wallet.seed}\r\n`;
 		}
 		return csvContent;
 	}
@@ -41,7 +41,7 @@ export default class Wallets {
 		let txtContent = "";
 		for (let idx = 0; idx < this.#wallets.length; idx++) {
 			const w = this.#wallets[idx];
-			txtContent += `Account: ${w.idx}\nPassword: ${w.password}\nAddress: ${w.wallet.address}\nPrivate Key: ${w.wallet.privateKey}\nSeed Phrase: ${w.wallet.seed}\n\n`;
+			txtContent += `Account: ${w.idx}\r\nPassword: ${w.password}\r\nAddress: ${w.wallet.address}\r\nPrivate Key: ${w.wallet.privateKey}\r\nSeed Phrase: ${w.wallet.seed}\n\n`;
 		}
 		return txtContent;
 	}
@@ -51,11 +51,25 @@ export default class Wallets {
 	}
 
 	#asMessage() {
-		let msgContent = "";
+		let walletsArray = [];
+		let chunk = [];
+
 		for (let idx = 0; idx < this.#wallets.length; idx++) {
 			const w = this.#wallets[idx];
-			msgContent += `Account: ${w.idx}\nPassword: ${w.password}\nAddress: ${w.wallet.address}\nPrivate Key: ${w.wallet.privateKey}\nSeed Phrase: ${w.wallet.seed}</b>\n\n`;
+			const walletInfo = `Account: ${w.idx}\nPassword: ${w.password}\nAddress: ${w.wallet.address}\nPrivate Key: ${w.wallet.privateKey}\nSeed Phrase: ${w.wallet.seed}\n\n`;
+
+			if (chunk.length < 5) {
+				chunk.push(walletInfo);
+			} else {
+				walletsArray.push([...chunk]);
+				chunk = [walletInfo];
+			}
 		}
-		return msgContent;
+
+		if (chunk.length > 0) {
+			walletsArray.push([...chunk]);
+		}
+
+		return walletsArray;
 	}
 }

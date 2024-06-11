@@ -3,7 +3,6 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/sakomg/web3-wallet-generator)
 ![GitHub last commit](https://img.shields.io/github/last-commit/sakomg/web3-wallet-generator)
 ![GitHub issues](https://img.shields.io/github/issues/sakomg/web3-wallet-generator)
-![GitHub license](https://img.shields.io/github/license/sakomg/web3-wallet-generator)
 
 This bot helps users generate cryptocurrency wallets for different blockchain networks directly through Telegram. The bot supports multiple formats for exporting wallet data and ensures that all generated data remains secure and private, accessible only by the user.
 
@@ -60,7 +59,7 @@ Developers can extend the bot by adding support for new blockchain networks. To 
 
 If you find this project useful and would like to support its development, you can send crypto donations to the following Ethereum (EVM) wallet address:
 
-```
+```text
 0x0D7D1Dd57D03872298236403d8d5d7A78135d417
 ```
 
