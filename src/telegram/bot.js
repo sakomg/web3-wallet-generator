@@ -1,5 +1,5 @@
 import { createActor } from "xstate";
-import { Bot, InputFile, session } from "grammy";
+import { Bot, InputFile } from "grammy";
 import { walletMachine } from "../state/walletMachine.js";
 import { chainKeyboard, exportAsKeyboard, numberKeyboard } from "../utils/constants.js";
 import { generateEVMWallets } from "../chains/evm.js";
@@ -16,12 +16,15 @@ export default class Telegram {
 	constructor(config, data) {
 		this.#data = data;
 		this.#bot = new Bot(config.TELEGRAM_TOKEN);
-		this.#bot.use(session());
 		this.#actor = createActor(walletMachine);
 		this.#actor.subscribe((state) => this.onStateChange(state));
 		this.#actor.start();
 
 		this.setupBot();
+	}
+
+	get bot() {
+		return this.#bot;
 	}
 
 	setupBot() {
@@ -204,9 +207,5 @@ export default class Telegram {
 		}
 
 		return result;
-	}
-
-	live() {
-		this.#bot.start();
 	}
 }

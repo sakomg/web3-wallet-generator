@@ -1,22 +1,23 @@
 {
-  "name": "web3-wallet-generator",
-  "version": "1.0.0",
-  "type": "module",
-  "description": "Tool to generate EVM wallets",
-  "main": "main.js",
-  "scripts": {
-    "start": "node src/main.js",
-    "start:evm": "node src/chains/evm.js",
-    "start:ton": "node src/chains/ton.js"
-  },
-  "author": "Alexander Komegunov <alekomegunov@gmail.com>",
-  "license": "ISC",
-  "dependencies": {
-    "dotenv": "^16.4.5",
-    "ethers": "^6.13.0",
-    "grammy": "^1.24.1",
-    "ton": "^13.9.0",
-    "ton-crypto": "^3.2.0",
-    "xstate": "^5.13.1"
-  }
+	"name": "web3-wallet-generator",
+	"version": "1.0.0",
+	"type": "module",
+	"description": "Bot to generate crypto wallets",
+	"main": "main.js",
+	"scripts": {
+		"start": "node src/main.js"
+	},
+	"author": "Alexander Komegunov <alekomegunov@gmail.com>",
+	"license": "MIT",
+	"dependencies": {
+		"dotenv": "^16.4.5",
+		"ethers": "^6.13.0",
+		"express": "^4.19.2",
+		"firebase-tools": "^13.11.2",
+		"grammy": "^1.24.1",
+		"supabase": "^1.176.4",
+		"ton": "^13.9.0",
+		"ton-crypto": "^3.2.0",
+		"xstate": "^5.13.1"
+	}
 }
