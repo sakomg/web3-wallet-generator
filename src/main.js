@@ -25,11 +25,11 @@ if (isDevelopment) {
 	const app = express();
 
 	app.use(express.json());
+	app.use(`/${secretPath}`, webhookCallback(bot, "express"));
 
 	const port = process.env.PORT || 3000;
 	app.listen(Number(port), async () => {
 		console.log("server running...");
-		console.log(domain);
 		await instance.bot.api.setWebhook(`https://${domain}/${secretPath}`);
 	});
 }
