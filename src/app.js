@@ -4,12 +4,12 @@ import Telegram from "./telegram/bot.js";
 import express from "express";
 import { webhookCallback } from "grammy";
 
-const data = await fs.readFile("./data/text.json", "utf8");
+const language = "en"; // TODO: add ru support
+const data = await fs.readFile(`./data/${language}.json`, "utf8");
 const isDevelopment = process.env.NODE_ENV !== "production";
-const token = process.env.TELEGRAM_TOKEN;
 
 if (!data || Object.keys(data).length === 0) {
-	throw new Error("Add messages to text.json file");
+	throw new Error("An error occurred during setup language file.");
 }
 
 const instance = new Telegram(process.env, JSON.parse(data));
@@ -27,6 +27,6 @@ if (isDevelopment) {
 
 	const port = process.env.PORT || 3000;
 	app.listen(Number(port), async () => {
-		console.log("server running...");
+		console.log(`server running on ${port} port...`);
 	});
 }

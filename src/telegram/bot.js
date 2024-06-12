@@ -178,7 +178,6 @@ export default class Telegram {
 	};
 
 	async deleteMessage(ctx, messageId) {
-		console.log(messageId);
 		const result = {
 			success: true,
 			message: null,

@@ -2,3 +2,4 @@
 /.env
 /node_modules
 /out
+/data/ru.json
