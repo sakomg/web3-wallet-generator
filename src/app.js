@@ -19,9 +19,7 @@ if (isDevelopment) {
 	instance.bot.start();
 } else {
 	console.log("production");
-	const domain = String(process.env.DOMAIN);
 	const secretPath = String(process.env.TELEGRAM_TOKEN);
-	console.log(domain);
 	const app = express();
 
 	app.use(express.json());
@@ -30,6 +28,5 @@ if (isDevelopment) {
 	const port = process.env.PORT || 3000;
 	app.listen(Number(port), async () => {
 		console.log("server running...");
-		await instance.bot.api.setWebhook(`https://${domain}/${secretPath}`);
 	});
 }
