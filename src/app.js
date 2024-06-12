@@ -4,7 +4,7 @@ import Telegram from "./telegram/bot.js";
 import express from "express";
 import { webhookCallback } from "grammy";
 
-const language = "en"; // TODO: add ru support
+const language = "eng"; // TODO: add ru support
 const data = await fs.readFile(`./data/${language}.json`, "utf8");
 const isDevelopment = process.env.NODE_ENV !== "production";
 
