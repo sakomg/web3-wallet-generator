@@ -2,10 +2,9 @@ import { createActor } from "xstate";
 import { Bot, InputFile } from "grammy";
 import { walletMachine } from "../state/walletMachine.js";
 import { chainKeyboard, exportAsKeyboard, numberKeyboard } from "../utils/constants.js";
-import { generateEVMWallets } from "../chains/evm.js";
-import { generateTONWallets } from "../chains/ton.js";
 import { currentTime } from "../utils/datetime.js";
 import Wallets from "../format/prepareStruc.js";
+import generateWallets from "../factory/main.js";
 
 export default class Telegram {
 	#bot;
@@ -113,14 +112,9 @@ export default class Telegram {
 		if (result.success) {
 			await ctx.reply(this.#data.select_export_format.replace("{format}", formatValue));
 
-			const walletHandler = {
-				EVM: generateEVMWallets,
-				TON: generateTONWallets,
-			};
-
 			console.log(this.#state);
 			const { chain, numberOfWallets, exportFormat } = this.#state["generatingWallets"];
-			const wallets = await walletHandler[chain](numberOfWallets);
+			const wallets = await generateWallets(chain, numberOfWallets);
 			const result = this.buildContent(exportFormat, wallets);
 
 			if (!result.success) {

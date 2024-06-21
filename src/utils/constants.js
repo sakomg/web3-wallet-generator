@@ -16,14 +16,20 @@ export const languageKeyboard = [
 export const chainKeyboard = [
 	[
 		{
-			text: "💎 TON (Telegram Open Network)",
+			text: "💎 TON",
 			callback_data: "SELECT_CHAIN:TON",
 		},
 	],
 	[
 		{
-			text: "🦊 EVM (Ethereum Virtual Machine)",
+			text: "🦊 EVM",
 			callback_data: "SELECT_CHAIN:EVM",
+		},
+	],
+	[
+		{
+			text: "🔥 SOLANA",
+			callback_data: "SELECT_CHAIN:SOL",
 		},
 	],
 ];
