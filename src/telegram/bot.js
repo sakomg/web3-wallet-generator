@@ -95,7 +95,7 @@ export default class Telegram {
 	}
 
 	isValidNumber(value) {
-		const customNumber = parseInt(value);
-		return !isNaN(customNumber) && customNumber > 0 && customNumber <= 500;
+		const regex = /^\d+$/;
+		return regex.test(value) && parseInt(value) > 0 && parseInt(value) <= 500;
 	}
 }
