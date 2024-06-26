@@ -28,7 +28,7 @@ export default class Telegram {
 	setupBot() {
 		this.#bot.command("start", async (ctx) => {
 			this.#actor.send({ type: "START" });
-			await ctx.reply(this.#data.start, {
+			await this.sendMessageSafely(ctx, this.#data.start, {
 				reply_markup: {
 					inline_keyboard: chainKeyboard,
 				},
@@ -36,11 +36,11 @@ export default class Telegram {
 		});
 
 		this.#bot.command("help", async (ctx) => {
-			await ctx.reply(this.#data.help);
+			await this.sendMessageSafely(ctx, this.#data.help);
 		});
 
 		this.#bot.command("thanks", async (ctx) => {
-			await ctx.reply(this.#data.thanks);
+			await this.sendMessageSafely(ctx, this.#data.thanks);
 		});
 
 		this.#bot.on("message", async (ctx) => {
@@ -72,22 +72,46 @@ export default class Telegram {
 		const numberOfWallets = ctx.message.text;
 		if (this.isValidNumber(numberOfWallets)) {
 			this.#actor.send({ type: "ENTER_CUSTOM_NUMBER", value: numberOfWallets });
-			await ctx.reply(this.#data.select_number.replace("{number}", numberOfWallets), {
+			await this.sendMessageSafely(ctx, this.#data.select_number.replace("{number}", numberOfWallets), {
 				reply_markup: {
 					inline_keyboard: exportAsKeyboard,
 				},
 			});
 		} else {
-			await ctx.reply(this.#data.invalid_number);
+			await this.sendMessageSafely(ctx, this.#data.invalid_number);
 		}
+	}
+
+	async sendMessageSafely(ctx, message, options) {
+		try {
+			const canSend = await this.hasPermissions(ctx);
+			if (canSend) {
+				await ctx.reply(message, options);
+			} else {
+				console.log(`Bot does not have permission to send messages in chat ${ctx.chat.id}`);
+			}
+		} catch (error) {
+			console.error("Error while sending message:", error);
+		}
+	}
+
+	async hasPermissions(ctx) {
+		const chatType = ctx.chat.type;
+
+		if (chatType === "private" || chatType === "group" || chatType === "supergroup") {
+			const botCanSendMessage = ctx.chat.permissions.canSendMessages;
+			return botCanSendMessage;
+		}
+
+		return false;
 	}
 
 	onStateChange(state) {
 		this.#state[state.value] = state.context;
 	}
 
-	isValidNumber = (value) => {
+	isValidNumber(value) {
 		const customNumber = parseInt(value);
 		return !isNaN(customNumber) && customNumber > 0 && customNumber <= 500;
-	};
+	}
 }
