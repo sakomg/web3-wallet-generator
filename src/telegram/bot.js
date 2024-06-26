@@ -85,11 +85,12 @@ export default class Telegram {
 	async sendMessageSafely(ctx, message, options) {
 		try {
 			const canSend = await this.hasPermissions(ctx);
-			if (canSend) {
-				await ctx.reply(message, options);
-			} else {
-				console.log(`Bot does not have permission to send messages in chat ${ctx.chat.id}`);
+			if (!canSend) {
+				console.log(`Bot does not have permission to send messages in chat ${ctx.chat}`);
+				return;
 			}
+
+			await ctx.reply(message, options);
 		} catch (error) {
 			console.error("Error while sending message:", error);
 		}
@@ -103,8 +104,11 @@ export default class Telegram {
 
 		const chatType = ctx.chat.type;
 
+		console.log("chatType", chatType);
+
 		if (chatType === "private" || chatType === "group" || chatType === "supergroup") {
 			const botCanSendMessage = ctx.chat.permissions?.canSendMessages ?? false;
+			console.log("ctx.chat.permissions", ctx.chat.permissions);
 			return botCanSendMessage;
 		}
 
