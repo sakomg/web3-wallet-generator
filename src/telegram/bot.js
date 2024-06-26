@@ -86,7 +86,7 @@ export default class Telegram {
 		try {
 			const canSend = await this.hasPermissions(ctx);
 			if (!canSend) {
-				console.log(`Bot does not have permission to send messages in chat ${ctx.chat}`);
+				console.log("Bot does not have permission to send messages in chat", ctx.chat);
 				return;
 			}
 
