@@ -1,5 +1,5 @@
 {
-	"start": "Select a blockchain network from the options below to generate wallets. This bot supports multiple chains like Ethereum (EVM) and TON (Telegram Open Network). \n\nYour data is secure and remains private with you. Let's get started!",
+	"start": "Select a blockchain network from the options below to generate wallets. This bot supports multiple chains.\n\nYour data is secure and remains private with you. Let's get started!",
 	"help": "If you need assistance, feel free to send a direct message to @saskakomegunov. \n\nHere are some common commands: \n/start - Restart the wallet generation process \n/help - Display this help message",
 	"thanks": "Thank you for considering a donation! Here's the EVM wallet address:\r\n\r\n0x0D7D1Dd57D03872298236403d8d5d7A78135d417",
 	"select_chain": "🔗 You’ve selected {chain}. Now, please choose how many wallets you would like to generate. The options below allow you to specify the number of wallets quickly.",

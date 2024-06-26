@@ -1,8 +1,12 @@
 declare module "walletGenerator" {
 	export interface Wallet {
-		address: string;
-		privateKey: string;
-		seed: string;
+		idx: string | null;
+		password: string | null;
+		wallet: {
+			address: string;
+			privateKey: string;
+			seed: string;
+		};
 	}
 
 	export class WalletGenerator {

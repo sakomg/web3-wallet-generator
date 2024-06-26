@@ -3,7 +3,8 @@
 	"version": "1.0.0",
 	"type": "module",
 	"description": "Bot to generate crypto wallets",
-	"main": "app.js",
+	"types": "./types/app.d.ts",
+	"main": "./app.js",
 	"scripts": {
 		"start": "node src/app.js"
 	},
