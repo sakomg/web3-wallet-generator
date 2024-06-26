@@ -96,13 +96,19 @@ export default class Telegram {
 	}
 
 	async hasPermissions(ctx) {
+		if (!ctx.chat) {
+			console.log("ctx.chat is undefined or null. Unable to check permissions.");
+			return false;
+		}
+
 		const chatType = ctx.chat.type;
 
 		if (chatType === "private" || chatType === "group" || chatType === "supergroup") {
-			const botCanSendMessage = ctx.chat.permissions.canSendMessages;
+			const botCanSendMessage = ctx.chat.permissions?.canSendMessages ?? false;
 			return botCanSendMessage;
 		}
 
+		console.log(`Unsupported chat type: ${chatType}. Unable to check permissions.`);
 		return false;
 	}
 
