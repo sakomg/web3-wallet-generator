@@ -2,6 +2,7 @@ import "dotenv/config";
 import fs from "fs/promises";
 import Telegram from "./telegram/bot.js";
 import express from "express";
+import path from "path";
 import { webhookCallback } from "grammy";
 
 const language = "eng"; // TODO: add ru support
@@ -27,6 +28,9 @@ const language = "eng"; // TODO: add ru support
 
 			app.use(express.json());
 			app.use(`/${secretPath}`, webhookCallback(instance.bot, "express"));
+			app.get("/", (req, res) => {
+        res.sendFile(path.join(process.cwd(), "public", "index.html"));
+      });
 
 			const port = process.env.PORT || 3000;
 			app.listen(Number(port), async () => {
