@@ -4,8 +4,11 @@ import Telegram from "./telegram/bot.js";
 import express from "express";
 import path from "path";
 import { webhookCallback } from "grammy";
+import { fileURLToPath } from "url";
 
 const language = "eng"; // TODO: add ru support
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 (async function main() {
 	try {
@@ -28,9 +31,10 @@ const language = "eng"; // TODO: add ru support
 
 			app.use(express.json());
 			app.use(`/${secretPath}`, webhookCallback(instance.bot, "express"));
-			app.get("/", (req, res) => {
-        res.sendFile(path.join(process.cwd(), "public", "index.html"));
-      });
+			app.use(express.static(path.join(__dirname, 'public')));
+			app.get('*', (req, res) => {
+				res.sendFile(path.join(__dirname, 'public', 'index.html'));
+			});
 
 			const port = process.env.PORT || 3000;
 			app.listen(Number(port), async () => {
